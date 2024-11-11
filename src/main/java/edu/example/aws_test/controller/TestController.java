@@ -3,41 +3,50 @@ package edu.example.aws_test.controller;
 import edu.example.aws_test.dto.TestDTO;
 import edu.example.aws_test.service.TestService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/tests")
+@Controller
 @RequiredArgsConstructor
 public class TestController {
     private final TestService testService;
 
-    @GetMapping("/{id}")
-    ResponseEntity<TestDTO> getTest(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(testService.read(id));
-    }
-
     @GetMapping
-    ResponseEntity<List<TestDTO>> getTests() {
-        return ResponseEntity.ok(testService.readAll());
+    public String testsPage(Model model) {
+        model.addAttribute("tests", testService.readAll());
+        return "index";
     }
 
-    @PostMapping
-    ResponseEntity<TestDTO> createTest(@Validated @RequestBody TestDTO testDTO) {
-        return ResponseEntity.ok(testService.create(testDTO));
+    @GetMapping("test/create")
+    public String newTestPage() {
+        return "new-test";
     }
 
-    @PutMapping("/{id}")
-    ResponseEntity<TestDTO> updateTest(@PathVariable("id") Long id, @Validated @RequestBody TestDTO testDTO) {
-        testDTO.setId(id);
-        return ResponseEntity.ok(testService.update(testDTO));
+    @PostMapping("/tests")
+    public String createTest(TestDTO testDTO) {
+        testService.create(testDTO);
+        return "redirect:/";
     }
 
-    @DeleteMapping("/{id}")
-    void deleteTest(@PathVariable("id") Long id) {
+    @GetMapping("test/update/{id}")
+    public String modifyTestPage(@PathVariable Long id, Model model) {
+        model.addAttribute("test", testService.read(id));
+        return "modify-test";
+    }
+
+    @PostMapping("/tests/update")
+    public String updateTest(@ModelAttribute TestDTO testDTO) {
+        testService.update(testDTO);
+        return "redirect:/";
+    }
+
+    @GetMapping("test/delete/{id}")
+    public String deleteTest(@PathVariable Long id) {
         testService.delete(id);
+        return "redirect:/";
     }
 }
