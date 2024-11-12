@@ -19,9 +19,4 @@ public class TestRestController {
     ResponseEntity<TestDTO> getTest(@PathVariable("id") Long id) {
         return ResponseEntity.ok(testService.read(id));
     }
-
-    @GetMapping
-    ResponseEntity<List<TestDTO>> getTests() {
-        return ResponseEntity.ok(testService.readAll());
-    }
 }
