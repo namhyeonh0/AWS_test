@@ -29,10 +29,4 @@ public class TestRestController {
     ResponseEntity<TestDTO> createTest(@Validated @RequestBody TestDTO testDTO) {
         return ResponseEntity.ok(testService.create(testDTO));
     }
-
-    @PutMapping("/{id}")
-    ResponseEntity<TestDTO> updateTest(@PathVariable("id") Long id, @Validated @RequestBody TestDTO testDTO) {
-        testDTO.setId(id);
-        return ResponseEntity.ok(testService.update(testDTO));
-    }
 }
