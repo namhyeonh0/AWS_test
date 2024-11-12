@@ -35,9 +35,4 @@ public class TestRestController {
         testDTO.setId(id);
         return ResponseEntity.ok(testService.update(testDTO));
     }
-
-    @DeleteMapping("/{id}")
-    void deleteTest(@PathVariable("id") Long id) {
-        testService.delete(id);
-    }
 }
