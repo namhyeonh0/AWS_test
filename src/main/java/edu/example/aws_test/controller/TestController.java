@@ -5,6 +5,7 @@ import edu.example.aws_test.service.TestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ public class TestController {
     }
 
     @PostMapping("/tests")
-    public String createTest(TestDTO testDTO) {
+    public String createTest(@Validated TestDTO testDTO) {
         testService.create(testDTO);
         return "redirect:/";
     }
@@ -39,7 +40,7 @@ public class TestController {
     }
 
     @PostMapping("/tests/update")
-    public String updateTest(@ModelAttribute TestDTO testDTO) {
+    public String updateTest(@Validated @ModelAttribute TestDTO testDTO) {
         testService.update(testDTO);
         return "redirect:/";
     }

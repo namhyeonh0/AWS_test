@@ -1,6 +1,7 @@
 package edu.example.aws_test.dto;
 
 import edu.example.aws_test.entity.Test;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class TestDTO {
     private Long id;
 
+    @NotBlank
     private String name;
 
     public TestDTO(Test test) {
