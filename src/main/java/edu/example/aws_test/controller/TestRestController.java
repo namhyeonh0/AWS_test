@@ -24,9 +24,4 @@ public class TestRestController {
     ResponseEntity<List<TestDTO>> getTests() {
         return ResponseEntity.ok(testService.readAll());
     }
-
-    @PostMapping
-    ResponseEntity<TestDTO> createTest(@Validated @RequestBody TestDTO testDTO) {
-        return ResponseEntity.ok(testService.create(testDTO));
-    }
 }
