@@ -14,9 +14,4 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestRestController {
     private final TestService testService;
-
-    @GetMapping("/{id}")
-    ResponseEntity<TestDTO> getTest(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(testService.read(id));
-    }
 }
