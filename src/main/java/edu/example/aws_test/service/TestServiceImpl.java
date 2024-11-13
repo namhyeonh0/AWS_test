@@ -19,7 +19,8 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public TestDTO read(Long id) {
-        return new TestDTO(testRepository.findById(id).orElseThrow(NoSuchElementException::new));
+        return new TestDTO(testRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new));
     }
 
     @Override
