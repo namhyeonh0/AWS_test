@@ -1,13 +1,9 @@
 package edu.example.aws_test.controller;
 
-import edu.example.aws_test.dto.TestDTO;
 import edu.example.aws_test.service.TestService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/tests")
